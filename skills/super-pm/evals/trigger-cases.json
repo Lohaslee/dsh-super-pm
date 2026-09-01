@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "zh-zero-to-one",
+      "language": "zh-CN",
+      "prompt": "我想做一个帮助独居老人生活的产品，但还不知道第一版该做什么。",
+      "expected": "use",
+      "rationale": "需要从模糊想法收敛用户、负向边界和第一版范围。"
+    },
+    {
+      "id": "zh-feature-tradeoff",
+      "language": "zh-CN",
+      "prompt": "免费版要不要去掉导出功能来推动付费？",
+      "expected": "use",
+      "rationale": "这是用户价值、商业目标和范围之间的产品取舍。"
+    },
+    {
+      "id": "zh-product-diagnosis",
+      "language": "zh-CN",
+      "prompt": "这个记账 App 功能很多但留存很差，帮我诊断最早做错了哪个产品决定。",
+      "expected": "use",
+      "rationale": "用户明确要求诊断产品方向和决策链。"
+    },
+    {
+      "id": "zh-prd",
+      "language": "zh-CN",
+      "prompt": "根据我们已经确认的范围，直接给一版可以交给开发的 PRD。",
+      "expected": "use",
+      "rationale": "用户要求基于产品决定生成交付文档。"
+    },
+    {
+      "id": "zh-api-product-contract",
+      "language": "zh-CN",
+      "prompt": "这个 API 的权限、数据归属和兼容边界还没定，先帮我做产品层面的取舍。",
+      "expected": "use",
+      "rationale": "API 尚有会改变用户权利和产品边界的上游决定。"
+    },
+    {
+      "id": "en-pricing",
+      "language": "en",
+      "prompt": "Should this workflow tool charge per seat or per completed project?",
+      "expected": "use",
+      "rationale": "Pricing changes the product value exchange and business model."
+    },
+    {
+      "id": "en-service-recovery",
+      "language": "en",
+      "prompt": "Design what an elder-care service should do when a worker cancels two hours before a visit.",
+      "expected": "use",
+      "rationale": "The request needs a service-recovery and trust decision."
+    },
+    {
+      "id": "en-regulation-product-impact",
+      "language": "en",
+      "prompt": "A new privacy rule may apply. Decide what the product should change in onboarding, consent, and data deletion while legal counsel confirms the interpretation.",
+      "expected": "use",
+      "rationale": "The request keeps legal interpretation with counsel but needs product-impact decisions now."
+    },
+    {
+      "id": "zh-translation",
+      "language": "zh-CN",
+      "prompt": "把这段英文翻译成简体中文，保留原来的段落格式。",
+      "expected": "do_not_use",
+      "rationale": "纯翻译任务没有产品决定。"
+    },
+    {
+      "id": "zh-pure-api-implementation",
+      "language": "zh-CN",
+      "prompt": "产品范围和接口协议都定好了，直接实现这个 API 并跑测试。",
+      "expected": "do_not_use",
+      "rationale": "纯工程实现应进入编码流程，不需要组织产品视角。"
+    },
+    {
+      "id": "zh-legal-ruling",
+      "language": "zh-CN",
+      "prompt": "这个合同条款在中国法律下肯定有效吗？只要确定的法律结论。",
+      "expected": "do_not_use",
+      "rationale": "确定性法律判断需要专业法务，不是产品视角任务。"
+    },
+    {
+      "id": "zh-factual-query",
+      "language": "zh-CN",
+      "prompt": "今天上海的天气怎么样？",
+      "expected": "do_not_use",
+      "rationale": "普通事实查询不涉及产品塑造或决策。"
+    },
+    {
+      "id": "en-bug-fix",
+      "language": "en",
+      "prompt": "Fix this TypeError in the existing parser and run its unit tests.",
+      "expected": "do_not_use",
+      "rationale": "A scoped implementation bug belongs to engineering work."
+    },
+    {
+      "id": "en-summary",
+      "language": "en",
+      "prompt": "Summarize this article in five bullet points without adding commentary.",
+      "expected": "do_not_use",
+      "rationale": "A bounded summarization request contains no product decision."
+    }
+  ]
+}

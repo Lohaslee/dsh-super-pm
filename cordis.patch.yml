@@ -1,0 +1,10 @@
+# Mount the package-local Super PM skill with an isolated provider.
+# The unique provider name avoids duplicate registration with DSH's default provider.
+- insert:
+    - id: super-pm-skill-filesystem
+      name: skill-filesystem
+      config:
+        providerName: super-pm-filesystem
+        includeDefaultRoots: false
+        customSkillDirs:
+          - ./skills
