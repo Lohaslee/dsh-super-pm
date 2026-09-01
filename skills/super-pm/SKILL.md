@@ -17,8 +17,10 @@ When this Skill is running inside DeepSeek Harness (DSH):
 4. Propose saving only a confirmed decision. Call `super_pm_save_decision` only after the user explicitly asks to save or modify the decision. Never persist hidden reasoning, full council dialogue, or unconfirmed assumptions.
 5. Use `super_pm_decision_history` when a prior decision may have been superseded. Preserve the lineage and explain which evidence or constraint changed the direction.
 6. When the user asks for pure implementation, stop product discovery once the minimum product constraints are clear and hand off to engineering tools or the DSH Task Board.
+7. When the user asks to move a confirmed decision into delivery, use `super_pm_prepare_handoff` to produce a reviewable `board_sync` draft. Show the parent task, child validation tasks, source decision, non-goals, and acceptance boundaries before creating anything.
+8. Only after explicit user confirmation, call the native DSH `board_sync` tool with the reviewed operations. Do not write the Task Board directly, create tasks automatically, or create tasks for git/release actions.
 
-The DSH decision tools are intentionally project-explicit and file-scoped. They do not read or write another project's `.super-pm` directory.
+The DSH decision tools are intentionally project-explicit and file-scoped. They do not read or write another project's `.super-pm` directory. The handoff tool is intentionally draft-only; the native DSH Task Board remains the single source of truth for tasks.
 
 ## Choose The Working Language
 

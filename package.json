@@ -1,6 +1,6 @@
 {
   "name": "dsh-super-pm",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Super PM product-thinking skill packaged as a DeepSeek Harness plugin",
   "type": "module",
   "main": "lib/index.js",
@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "check": "node --check lib/index.js && node scripts/validate.mjs",
-    "test": "npm run check && node scripts/test-decisions.mjs",
+    "test": "npm run check && node scripts/test-decisions.mjs && node scripts/test-handoff.mjs",
     "pack:check": "npm pack --dry-run"
   },
   "keywords": [

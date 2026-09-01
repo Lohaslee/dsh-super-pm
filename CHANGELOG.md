@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 - 2026-09-01
+
+- Add draft-only handoff from confirmed product decisions to native DSH Task Board `board_sync` operations.
+- Add validation-task generation with source decision, non-goals, and acceptance boundaries.
+- Add DSH integration guidance for review-before-create task delivery.
+
 ## 0.2.0 - 2026-09-01
 
 - Add explicit-project Super PM decision tools for reading, saving, history, and validation.

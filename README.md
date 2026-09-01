@@ -113,14 +113,15 @@ dsh plugin --profile web add dsh-super-pm
 
 ## 当前版本
 
-当前版本为 `0.2.0`，新增项目级产品决策记忆和四个 DSH 决策工具：
+当前版本为 `0.2.0`，新增项目级产品决策记忆、四个决策工具和一个 Task Board 交付草稿工具：
 
 - `super_pm_read_decisions`
 - `super_pm_save_decision`
 - `super_pm_decision_history`
 - `super_pm_validate_decisions`
+- `super_pm_prepare_handoff`：把确认决策转换为 `board_sync` 任务草稿，不直接修改 Task Board
 
-所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/decisions.md`。
+所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/decisions.md`。Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
 
 ## 开发与验证
 
