@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0 - 2026-09-01
+
+- Add opt-in redacted decision cards for copying and sharing.
+- Add lightweight product pulse feedback without pretending to be a scientific score.
+- Add an offline, low-noise easter egg discovery tool.
+- Keep fun features privacy-preserving and non-mutating.
+
 ## 0.6.0 - 2026-09-01
 
 - Add `/super-pm` command mode hints for diagnose, decide, brief, prd, review, and handoff.

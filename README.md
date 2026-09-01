@@ -115,7 +115,7 @@ dsh plugin --profile web add dsh-super-pm
 
 ## 当前版本
 
-当前版本为 `0.5.0`，新增项目级产品决策记忆、验证记录、恢复摘要、状态管理和 Task Board 交付追踪工具：
+当前版本为 `0.7.0`，新增项目级产品决策记忆、验证记录、恢复摘要、状态管理、Task Board 交付追踪和可分享体验：
 
 - `super_pm_read_decisions`
 - `super_pm_save_decision`
@@ -129,8 +129,14 @@ dsh plugin --profile web add dsh-super-pm
 - `super_pm_generate_prd`：根据确认上下文生成 PRD 预览，不写文件
 - `super_pm_save_prd`：用户确认后保存 PRD
 - `super_pm_validate_prd`：校验 PRD 完整性和成熟度
+- `super_pm_share_decision`：生成默认脱敏的可分享决定卡
+- `super_pm_product_pulse`：返回轻量的方向、证据、边界和行动状态
+- `super_pm_discover_easter_egg`：主动发现低干扰彩蛋
+- `super_pm_share_decision`：生成默认脱敏的可分享决定卡
+- `super_pm_product_pulse`：返回轻量的方向、证据、边界和行动状态
+- `super_pm_discover_easter_egg`：主动发现低干扰彩蛋
 
-所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/`。验证记录必须包含观察结果、解释和下一步；PRD 必须先生成预览并校验，用户确认后才保存；Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
+分享和趣味功能是 v0.7 的可选体验：用户可以主动生成脱敏的决定卡、查看产品 Pulse，或主动寻找彩蛋。它们不自动外发、不联网、不修改项目状态。所有项目工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/`。验证记录必须包含观察结果、解释和下一步；PRD 必须先生成预览并校验，用户确认后才保存；Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。分享卡和彩蛋均为主动触发，不自动外发、不联网、不包含项目路径或完整私密讨论。
 
 ## 开发与验证
 
