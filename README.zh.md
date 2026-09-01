@@ -1,6 +1,6 @@
 # dsh-super-pm
 
-中文说明请查看主文档：[README.md](README.md)。
+中文说明请查看主文档：[README.md](README.md)。主文档包含 Super PM 的产品定位、DSH 插件说明、安装方式、开发验证和发布流程。
 
 `dsh-super-pm` 是一个面向 **DeepSeek Harness（DSH）** 的标准插件，用于打包和分发 [Super PM](https://github.com/Lohaslee/super-pm) 产品思考 Skill。
 

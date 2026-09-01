@@ -120,12 +120,19 @@ python3 skills/super-pm/scripts/validate_sources.py
 
 ## 发布到 GitHub
 
+已有 GitHub 仓库时，提交和推送更新：
+
 ```bash
-git init -b main
 git add .
-git commit -m "feat: package super-pm as a dsh plugin"
-git remote add origin https://github.com/<your-account>/dsh-super-pm.git
-git push -u origin main
+git commit -m "chore: prepare v0.1.0 release"
+git push origin main
+```
+
+创建稳定版本 tag：
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
 ```
 
 建议发布前执行：
@@ -152,6 +159,8 @@ python3 skills/super-pm/scripts/validate_sources.py
 ├── LICENSE
 ├── README.md
 ├── README.zh.md
+├── .github/
+│   └── workflows/ci.yml
 ├── cordis.patch.yml
 ├── lib/
 │   └── index.js
