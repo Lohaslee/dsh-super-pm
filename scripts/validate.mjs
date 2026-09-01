@@ -21,7 +21,7 @@ if (!patch.includes("providerName: super-pm-filesystem")) throw new Error("patch
 if (!patch.includes("customSkillDirs:") || !patch.includes("- ./skills")) throw new Error("patch must mount the package-local skills directory");
 if (!patch.includes("id: super-pm-tools") || !patch.includes("name: dsh-super-pm")) throw new Error("patch must mount the plugin entry");
 if (!packageJson.peerDependencies?.["@deepseek-ai/dsh-tools"]) throw new Error("plugin must declare dsh-tools as a peer dependency");
-for (const tool of ["super_pm_read_decisions", "super_pm_save_decision", "super_pm_decision_history", "super_pm_validate_decisions", "super_pm_prepare_handoff"]) {
+for (const tool of ["super_pm_read_decisions", "super_pm_save_decision", "super_pm_decision_history", "super_pm_validate_decisions", "super_pm_prepare_handoff", "super_pm_recovery_summary", "super_pm_record_validation", "super_pm_update_state"]) {
   if (!tools.includes(`name: \"${tool}\"`)) throw new Error(`missing tool: ${tool}`);
 }
 

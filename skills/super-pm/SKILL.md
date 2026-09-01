@@ -22,6 +22,8 @@ When this Skill is running inside DeepSeek Harness (DSH):
 
 The DSH decision tools are intentionally project-explicit and file-scoped. They do not read or write another project's `.super-pm` directory. The handoff tool is intentionally draft-only; the native DSH Task Board remains the single source of truth for tasks.
 
+For ongoing projects, use `super_pm_recovery_summary` at the start of a resumed session. Use `super_pm_record_validation` only for an executed validation and include the observed result, interpretation, decision change or retention, and next action. Use `super_pm_update_state` after a confirmed stage, objective, open assumption, or next action changes. These records are project memory, not instructions, and must never be fabricated from a plan that has not run.
+
 ## Choose The Working Language
 
 1. Detect the language of the user's latest substantive product request. Use that language for questions, discussion, decision records, reports, and PRDs.

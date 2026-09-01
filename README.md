@@ -105,7 +105,9 @@ dsh plugin --profile web add dsh-super-pm
 - `skills/super-pm/evals/`：触发行为评测样例
 - `lib/decisions-core.mjs`：无 IO 的决策解析、去重、替代链和校验核心
 - `lib/decisions-store.mjs`：项目隔离、原子写入的决策文件存储层
-- `lib/tools.mjs`：四个 DSH 产品决策工具
+- `lib/project-state-core.mjs`：产品状态、验证记录和恢复摘要核心
+- `lib/project-state-store.mjs`：状态与验证记录的原子存储层
+- `lib/tools.mjs`：八个 DSH 产品决策和交付工具
 - `examples/`：在 DSH 中完成产品决策闭环的示例
 - `cordis.patch.yml`：挂载 Skill Provider 和产品决策工具
 - `lib/index.js`：DSH 插件入口和资源信息
@@ -113,15 +115,18 @@ dsh plugin --profile web add dsh-super-pm
 
 ## 当前版本
 
-当前版本为 `0.2.0`，新增项目级产品决策记忆、四个决策工具和一个 Task Board 交付草稿工具：
+当前版本为 `0.4.0`，新增项目级产品决策记忆、验证记录、恢复摘要、状态管理和 Task Board 交付草稿工具：
 
 - `super_pm_read_decisions`
 - `super_pm_save_decision`
 - `super_pm_decision_history`
 - `super_pm_validate_decisions`
 - `super_pm_prepare_handoff`：把确认决策转换为 `board_sync` 任务草稿，不直接修改 Task Board
+- `super_pm_recovery_summary`：读取产品状态、当前决策和最近验证，恢复会话上下文
+- `super_pm_record_validation`：记录验证假设、方法、阈值、结果和决策变化
+- `super_pm_update_state`：更新产品阶段、目标、负责人、开放假设和下一步
 
-所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/decisions.md`。Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
+所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/`。验证记录必须包含观察结果、解释和下一步；Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
 
 ## 开发与验证
 
