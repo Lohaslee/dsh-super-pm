@@ -8,3 +8,5 @@
         includeDefaultRoots: false
         customSkillDirs:
           - ./skills
+    - id: super-pm-tools
+      name: dsh-super-pm

@@ -62,7 +62,7 @@ Super PM 的目标，是陪你分析需求、拆开事实与假设、讨论取�
 - 保留中英文参考资料、验证脚本和触发评测
 - 让 Skill 可以从 GitHub、npm 或本地 checkout 安装
 
-当前版本不额外注册自定义 GUI 或未经定义的运行时工具。产品推理由 Skill 负责，插件负责可复现的安装、分发和激活。
+当前版本不注册自定义 GUI，也不自动执行外部研究。插件额外提供四个轻量的产品决策工具：读取、保存、查看历史和校验 `.super-pm/decisions.md`。保存动作必须由用户明确授权，产品推理由 Skill 负责，插件负责项目级记忆和可复现的安装、分发和激活。
 
 ## 在 DSH 中安装
 
@@ -86,15 +86,41 @@ dsh plugin --profile web add dsh-super-pm
 
 修改服务端 profile 组合后，需要重启 `dsh web`。启动后可以使用 `/super-pm`，也可以直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
 
+### 决策工具
+
+| 工具 | 作用 |
+| --- | --- |
+| `super_pm_read_decisions` | 读取指定项目的当前产品决策 |
+| `super_pm_save_decision` | 保存用户明确确认过的产品决策 |
+| `super_pm_decision_history` | 查看某个决定及其替代历史 |
+| `super_pm_validate_decisions` | 检查决策文件的结构和替代关系 |
+
+所有工具都要求传入明确的绝对项目根目录。插件不会根据当前 `cwd` 猜测项目，也不会跨项目读取 `.super-pm/decisions.md`。保存工具只在用户明确要求保存或修改时执行；方向改变时必须填写变更原因，旧决定会保留并标记为已替代。
+
 ## 包含内容
 
 - `skills/super-pm/SKILL.md`：面向模型的完整工作流和行为规则
 - `skills/super-pm/references/`：中英文产品视角、路由、验证、决策记忆和 PRD 模板
 - `skills/super-pm/scripts/`：上游 Skill 的来源校验脚本
 - `skills/super-pm/evals/`：触发行为评测样例
-- `cordis.patch.yml`：通过独立的 `skill-filesystem` provider 挂载插件自带 Skill 根目录
+- `lib/decisions-core.mjs`：无 IO 的决策解析、去重、替代链和校验核心
+- `lib/decisions-store.mjs`：项目隔离、原子写入的决策文件存储层
+- `lib/tools.mjs`：四个 DSH 产品决策工具
+- `examples/`：在 DSH 中完成产品决策闭环的示例
+- `cordis.patch.yml`：挂载 Skill Provider 和产品决策工具
 - `lib/index.js`：DSH 插件入口和资源信息
 - `scripts/validate.mjs`：插件结构与 Skill frontmatter 校验脚本
+
+## 当前版本
+
+当前版本为 `0.2.0`，新增项目级产品决策记忆和四个 DSH 决策工具：
+
+- `super_pm_read_decisions`
+- `super_pm_save_decision`
+- `super_pm_decision_history`
+- `super_pm_validate_decisions`
+
+所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/decisions.md`。
 
 ## 开发与验证
 
@@ -165,7 +191,10 @@ python3 skills/super-pm/scripts/validate_sources.py
 ├── lib/
 │   └── index.js
 ├── package.json
+├── examples/
+│   └── 01-dsh-decision-loop.md
 ├── scripts/
+│   ├── test-decisions.mjs
 │   └── validate.mjs
 └── skills/
     └── super-pm/
