@@ -126,8 +126,11 @@ dsh plugin --profile web add dsh-super-pm
 - `super_pm_record_validation`：记录验证假设、方法、阈值、结果和决策变化
 - `super_pm_update_state`：更新产品阶段、目标、负责人、开放假设和下一步
 - `super_pm_traceability_report`：汇总决策、验证记录和 Task Board 任务的关联关系
+- `super_pm_generate_prd`：根据确认上下文生成 PRD 预览，不写文件
+- `super_pm_save_prd`：用户确认后保存 PRD
+- `super_pm_validate_prd`：校验 PRD 完整性和成熟度
 
-所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/`。验证记录必须包含观察结果、解释和下一步；Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
+所有工具都要求显式传入绝对项目根目录。只有用户明确要求保存或修改时，插件才会写入 `.super-pm/`。验证记录必须包含观察结果、解释和下一步；PRD 必须先生成预览并校验，用户确认后才保存；Task Board 交付也必须先展示草稿并获得用户确认，再调用 DSH 原生 `board_sync`。
 
 ## 开发与验证
 

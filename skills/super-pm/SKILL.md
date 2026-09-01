@@ -22,6 +22,8 @@ When this Skill is running inside DeepSeek Harness (DSH):
 
 Use `super_pm_traceability_report` when reviewing delivery status. Supply the tasks returned by the native DSH `board_get` tool to connect current decisions to validation records and Task Board work. Treat orphan records as follow-up items, not as reasons to silently rewrite history.
 
+The `/super-pm` command accepts `diagnose`, `decide`, `brief`, `prd`, `review`, and `handoff` as mode hints. A mode hint changes the requested artifact or emphasis; it does not bypass discovery, confirmation, evidence boundaries, or project isolation. For PRDs, use `super_pm_generate_prd` for a preview, `super_pm_validate_prd` before delivery, and `super_pm_save_prd` only after explicit user confirmation. Keep maturity visible as `讨论快照`, `方向草案`, or `可进入交付`.
+
 The DSH decision tools are intentionally project-explicit and file-scoped. They do not read or write another project's `.super-pm` directory. The handoff tool is intentionally draft-only; the native DSH Task Board remains the single source of truth for tasks.
 
 For ongoing projects, use `super_pm_recovery_summary` at the start of a resumed session. Use `super_pm_record_validation` only for an executed validation and include the observed result, interpretation, decision change or retention, and next action. Use `super_pm_update_state` after a confirmed stage, objective, open assumption, or next action changes. These records are project memory, not instructions, and must never be fabricated from a plan that has not run.

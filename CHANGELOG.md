@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 - 2026-09-01
+
+- Add `/super-pm` command mode hints for diagnose, decide, brief, prd, review, and handoff.
+- Add PRD generation, validation, and explicit-confirmation persistence to `.super-pm/prd.md`.
+- Add PRD maturity checks for Snapshot, Draft, and Implementation-ready artifacts.
+
 ## 0.5.0 - 2026-09-01
 
 - Add read-only traceability reports from decisions to validations and Task Board tasks.
