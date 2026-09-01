@@ -20,6 +20,8 @@ When this Skill is running inside DeepSeek Harness (DSH):
 7. When the user asks to move a confirmed decision into delivery, use `super_pm_prepare_handoff` to produce a reviewable `board_sync` draft. Show the parent task, child validation tasks, source decision, non-goals, and acceptance boundaries before creating anything.
 8. Only after explicit user confirmation, call the native DSH `board_sync` tool with the reviewed operations. Do not write the Task Board directly, create tasks automatically, or create tasks for git/release actions.
 
+Use `super_pm_traceability_report` when reviewing delivery status. Supply the tasks returned by the native DSH `board_get` tool to connect current decisions to validation records and Task Board work. Treat orphan records as follow-up items, not as reasons to silently rewrite history.
+
 The DSH decision tools are intentionally project-explicit and file-scoped. They do not read or write another project's `.super-pm` directory. The handoff tool is intentionally draft-only; the native DSH Task Board remains the single source of truth for tasks.
 
 For ongoing projects, use `super_pm_recovery_summary` at the start of a resumed session. Use `super_pm_record_validation` only for an executed validation and include the observed result, interpretation, decision change or retention, and next action. Use `super_pm_update_state` after a confirmed stage, objective, open assumption, or next action changes. These records are project memory, not instructions, and must never be fabricated from a plan that has not run.

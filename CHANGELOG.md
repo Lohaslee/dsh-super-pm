@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 - 2026-09-01
+
+- Add read-only traceability reports from decisions to validations and Task Board tasks.
+- Detect orphan validation and task references without rewriting project history.
+- Add tests for delivery traceability and cross-artifact consistency.
+
 ## 0.4.0 - 2026-09-01
 
 - Add compact project state in `.super-pm/state.yaml` for session recovery.
