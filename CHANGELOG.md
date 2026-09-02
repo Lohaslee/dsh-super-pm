@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 - 2026-09-01
+
+- Add contextual easter-egg events for scope cuts, first users, validation, trust breakthroughs, and decision reversals.
+- Add natural lens-alias lead-ins such as “这次由乔帮主路过提醒一句” and “龙哥思考了一下说”.
+- Add vague-intent meta-egg replies that preserve curiosity instead of revealing trigger rules.
+
 ## 0.7.1 - 2026-09-01
 
 - Add low-probability stateless random easter-egg discovery after meaningful milestones.
