@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.2 - 2026-09-01
+
+- Remove the misleading `/super-pm` slash command, whose DSH handler cannot create a model turn.
+- Document direct natural-language Skill invocation as the supported DSH workflow.
+
 ## 0.8.1 - 2026-09-01
 
 - Sync the refined easter-egg behavior into both the bundled and standalone Super PM Skills.

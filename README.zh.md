@@ -12,4 +12,4 @@
 dsh plugin --profile web add github:Lohaslee/dsh-super-pm
 ```
 
-安装后重启 `dsh web`，即可使用 `/super-pm`。完整介绍、能力说明、开发命令和发布流程请阅读 [README.md](README.md)。
+安装后重启 `dsh web`，直接发送产品请求即可触发，例如：`使用 super-pm，帮我判断首个版本该服务谁`。不要把 `/super-pm` 当成直接命令，因为 DSH Slash Command 不会创建模型回合。完整介绍、能力说明、开发命令和发布流程请阅读 [README.md](README.md)。

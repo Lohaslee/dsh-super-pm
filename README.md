@@ -51,7 +51,7 @@ Super PM 的目标，是陪你分析需求、拆开事实与假设、讨论取�
         ↓ 随包分发
  dsh-super-pm DSH 插件
         ↓ 安装到 DeepSeek Harness
- DSH 发现 /super-pm 并加载 Skill
+ DSH 发现 super-pm Skill 并按产品请求加载
 ```
 
 插件负责：
@@ -84,7 +84,7 @@ dsh plugin --profile web add /absolute/path/to/dsh-super-pm
 dsh plugin --profile web add dsh-super-pm
 ```
 
-修改服务端 profile 组合后，需要重启 `dsh web`。启动后可以使用 `/super-pm`，也可以直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
+修改服务端 profile 组合后，需要重启 `dsh web`。不要把 `/super-pm` 当成直接命令：DSH Slash Command 不会发送模型回合。请直接输入产品请求，例如 `使用 super-pm，帮我诊断这个产品的留存问题`，或直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
 
 ### 决策工具
 

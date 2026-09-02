@@ -1,6 +1,6 @@
 {
   "name": "dsh-super-pm",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Super PM product-thinking skill packaged as a DeepSeek Harness plugin",
   "type": "module",
   "main": "lib/index.js",
