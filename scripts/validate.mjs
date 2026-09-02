@@ -16,10 +16,10 @@ if (packageJson.dsh?.bundle?.patch !== "./cordis.patch.yml") throw new Error("mi
 if (!/^---\s*\nname:\s*super-pm\s*\n/m.test(skill)) throw new Error("bundled Skill must declare name: super-pm");
 if (!/^description:\s*.+$/m.test(skill)) throw new Error("bundled Skill must declare a description");
 if (!patch.includes("id: super-pm-skill-filesystem")) throw new Error("patch must declare the Super PM provider node");
-if (!patch.includes("name: skill-filesystem")) throw new Error("patch must use skill-filesystem");
+if (!patch.includes("name: skill-filesystem") && !patch.includes("name: \"@deepseek-ai/dsh-skill-filesystem\"")) throw new Error("patch must use dsh-skill-filesystem");
 if (!patch.includes("providerName: super-pm-filesystem")) throw new Error("patch must use a unique provider name");
 if (!patch.includes("customSkillDirs:") || !patch.includes("- ./skills")) throw new Error("patch must mount the package-local skills directory");
-if (!patch.includes("id: super-pm-tools") || !patch.includes("name: dsh-super-pm")) throw new Error("patch must mount the plugin entry");
+if (patch.includes("id: super-pm-tools") && !patch.includes("name: dsh-super-pm")) throw new Error("legacy plugin entry must point to dsh-super-pm");
 if (!packageJson.peerDependencies?.["@deepseek-ai/dsh-tools"]) throw new Error("plugin must declare dsh-tools as a peer dependency");
 for (const tool of ["super_pm_read_decisions", "super_pm_save_decision", "super_pm_decision_history", "super_pm_validate_decisions", "super_pm_prepare_handoff", "super_pm_recovery_summary", "super_pm_record_validation", "super_pm_update_state", "super_pm_traceability_report", "super_pm_generate_prd", "super_pm_save_prd", "super_pm_validate_prd", "super_pm_share_decision", "super_pm_product_pulse", "super_pm_discover_easter_egg"]) {
   if (!tools.includes(`name: \"${tool}\"`)) throw new Error(`missing tool: ${tool}`);

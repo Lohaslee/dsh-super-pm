@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1 - 2026-09-01
+
+- Add low-probability stateless random easter-egg discovery after meaningful milestones.
+- Keep explicit keyword and seven-decision milestone easter eggs deterministic.
+- Add deterministic tests for random hit and miss behavior.
+
 ## 0.7.0 - 2026-09-01
 
 - Add opt-in redacted decision cards for copying and sharing.

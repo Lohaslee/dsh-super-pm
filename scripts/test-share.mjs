@@ -11,5 +11,7 @@ const pulse = productPulse(decision, [{ observed: "6\/10", nextAction: "扩大�
 assert.equal(pulse.level, "清晰");
 assert.equal(easterEgg("我想找彩蛋").found, true);
 assert.equal(easterEgg("普通问题").found, false);
+assert.equal(easterEgg("普通问题", { random: true, randomFn: () => 0.99 }).found, false);
+assert.equal(easterEgg("普通问题", { random: true, randomFn: () => 0, pickFn: () => 0 }).id, "smallest-test");
 assert.equal(easterEgg("普通问题", { completedDecisions: 7 }).id, "seven-lenses");
 console.log("share and easter egg tests passed");

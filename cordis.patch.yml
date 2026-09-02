@@ -1,12 +1,15 @@
 # Mount the package-local Super PM skill with an isolated provider.
 # The unique provider name avoids duplicate registration with DSH's default provider.
+# NOTE: the `super-pm-tools` entry (which loads the dsh-super-pm runtime plugin that
+# injects base-bundle services) is hosted in dsh-base's patch instead, so it runs
+# inside the base bundle's Cordis context and can see `tools`/`systemPrompt`/`commands`
+# on dsh rc.2. As a separate bundle it is a sibling of the base bundle and those
+# services are invisible to it.
 - insert:
     - id: super-pm-skill-filesystem
-      name: skill-filesystem
+      name: "@deepseek-ai/dsh-skill-filesystem"
       config:
         providerName: super-pm-filesystem
         includeDefaultRoots: false
         customSkillDirs:
           - ./skills
-    - id: super-pm-tools
-      name: dsh-super-pm
