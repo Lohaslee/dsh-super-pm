@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 - 2026-09-01
+
+- Sync the refined easter-egg behavior into both the bundled and standalone Super PM Skills.
+- Support vague hidden-feature curiosity with playful meta-answers instead of revealing trigger rules.
+- Support contextual lens-alias lead-ins for meaningful product milestones.
+
 ## 0.8.0 - 2026-09-01
 
 - Add contextual easter-egg events for scope cuts, first users, validation, trust breakthroughs, and decision reversals.
