@@ -57,12 +57,12 @@ Super PM 的目标，是陪你分析需求、拆开事实与假设、讨论取�
 插件负责：
 
 - 提供标准的 DSH `package.json` 元数据
-- 通过 `cordis.patch.yml` 接入 DSH profile
+- 通过 `cordis.patch.yml` 以标准 bundle 接入 DSH profile：只改 profile，不修改 DSH 安装目录，可随 DSH 升级
 - 挂载插件自带的 `skills/super-pm/` 目录
 - 保留中英文参考资料、验证脚本和触发评测
 - 让 Skill 可以从 GitHub、npm 或本地 checkout 安装
 
-当前版本不注册自定义 GUI，也不自动执行外部研究。插件额外提供四个轻量的产品决策工具：读取、保存、查看历史和校验 `.super-pm/decisions.md`。保存动作必须由用户明确授权，产品推理由 Skill 负责，插件负责项目级记忆和可复现的安装、分发和激活。
+当前版本不注册自定义 GUI，也不自动执行外部研究。插件注册 15 个 `super_pm_*` 工具，覆盖决策记忆、项目状态与验证、交付与追溯、PRD 与分享（见下文「工具」）；它们只读写项目内的 `.super-pm/` 文件，不发起模型回合也不抓取外部资料。保存动作必须由用户明确授权，产品推理由 Skill 负责，插件负责项目级记忆和可复现的安装、分发和激活。
 
 ## 在 DSH 中安装
 
@@ -84,9 +84,13 @@ dsh plugin --profile web add /absolute/path/to/dsh-super-pm
 dsh plugin --profile web add dsh-super-pm
 ```
 
-修改服务端 profile 组合后，需要重启 `dsh web`。不要把 `/super-pm` 当成直接命令：DSH Slash Command 不会发送模型回合。请直接输入产品请求，例如 `使用 super-pm，帮我诊断这个产品的留存问题`，或直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
+修改服务端 profile 组合后，需要重启 `dsh web`。`dsh plugin add` 已把本包登记进 profile 的 `dsh.profile.bundles`，挂载点随 profile 走：升级 DSH 不需要改动安装目录里的任何文件。运行时只依赖 base bundle 提供的 `tools` 与 `systemPrompt` 两个服务。不要把 `/super-pm` 当成直接命令：DSH Slash Command 不会发送模型回合。请直接输入产品请求，例如 `使用 super-pm，帮我诊断这个产品的留存问题`，或直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
 
-### 决策工具
+### 工具
+
+插件共注册 15 个 `super_pm_*` 工具，按用途分四组。
+
+**决策记忆（4）**
 
 | 工具 | 作用 |
 | --- | --- |
@@ -94,6 +98,12 @@ dsh plugin --profile web add dsh-super-pm
 | `super_pm_save_decision` | 保存用户明确确认过的产品决策 |
 | `super_pm_decision_history` | 查看某个决定及其替代历史 |
 | `super_pm_validate_decisions` | 检查决策文件的结构和替代关系 |
+
+**项目状态与验证（3）**：`super_pm_update_state`、`super_pm_recovery_summary`、`super_pm_record_validation`
+
+**交付与追溯（3）**：`super_pm_prepare_handoff`、`super_pm_traceability_report`、`super_pm_product_pulse`
+
+**PRD 与分享（5）**：`super_pm_generate_prd`、`super_pm_save_prd`、`super_pm_validate_prd`、`super_pm_share_decision`、`super_pm_discover_easter_egg`
 
 所有工具都要求传入明确的绝对项目根目录。插件不会根据当前 `cwd` 猜测项目，也不会跨项目读取 `.super-pm/decisions.md`。保存工具只在用户明确要求保存或修改时执行；方向改变时必须填写变更原因，旧决定会保留并标记为已替代。
 

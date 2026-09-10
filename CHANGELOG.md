@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.3 - 2026-09-10
+
+- Mount as a standard DSH profile bundle: both rows (`super-pm-tools`, `super-pm-skill-filesystem`) now live in this package's own `cordis.patch.yml`, and the package only has to be listed in the profile's `dsh.profile.bundles`. Editing the installed `dsh-base` patch is no longer required, so a DSH upgrade can no longer silently drop the mount.
+- Inject `tools` and `systemPrompt` statically, and keep them on the normalised default export the loader applies, instead of registering tools from a lazy `ctx.inject` callback. A future release that stops providing those services now fails loud instead of loading a plugin with no tools.
+- Keep the Skill provider package-relative (`customSkillDirs: ./skills`) with its own `providerName`, so no absolute path is pinned into any installed profile.
+
 ## 0.8.2 - 2026-09-01
 
 - Remove the misleading `/super-pm` slash command, whose DSH handler cannot create a model turn.
