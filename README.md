@@ -72,6 +72,12 @@ Super PM 的目标，是陪你分析需求、拆开事实与假设、讨论取�
 dsh plugin --profile web add github:Lohaslee/dsh-super-pm
 ```
 
+固定到已发布版本（推荐用于复核）：
+
+```bash
+dsh plugin --profile web add github:Lohaslee/dsh-super-pm#v0.8.3
+```
+
 ### 从本地 checkout 安装
 
 ```bash
@@ -80,11 +86,41 @@ dsh plugin --profile web add /absolute/path/to/dsh-super-pm
 
 ### 从 npm 安装
 
+npm 包尚未发布（`npm view dsh-super-pm` 目前返回 404），发布后才可使用：
+
 ```bash
 dsh plugin --profile web add dsh-super-pm
 ```
 
 修改服务端 profile 组合后，需要重启 `dsh web`。`dsh plugin add` 已把本包登记进 profile 的 `dsh.profile.bundles`，挂载点随 profile 走：升级 DSH 不需要改动安装目录里的任何文件。运行时只依赖 base bundle 提供的 `tools` 与 `systemPrompt` 两个服务。不要把 `/super-pm` 当成直接命令：DSH Slash Command 不会发送模型回合。请直接输入产品请求，例如 `使用 super-pm，帮我诊断这个产品的留存问题`，或直接描述产品决策、0 到 1 想法、功能定义或产品诊断问题。
+
+### 安装后验证挂载
+
+本包只用官方 bundle 接缝挂载，不依赖任何 `dsh-base` 改动：
+
+- `package.json` 的 `dsh.bundle.patch` 指向包内 `cordis.patch.yml`；
+- `dsh plugin add` 只把 `dsh-super-pm` 登记进 profile 的 `dsh.profile.bundles`；
+- 启动时，profile 组合树把包内 patch 的两行都插入：
+  - `super-pm-tools`（`name: dsh-super-pm`）：注册 15 个 `super_pm_*` 运行时工具；
+  - `super-pm-skill-filesystem`（`name: "@deepseek-ai/dsh-skill-filesystem"`，`providerName: super-pm-filesystem`）：挂载随包的 `./skills`。
+
+`dsh-base` 的 patch 中没有任何 `super-pm` 条目。可直接验证：
+
+```bash
+dsh --profile web --dump-config | grep -A7 '^# == dsh-super-pm'
+```
+
+输出应包含以下两行，缺一不可：
+
+```yaml
+# == dsh-super-pm
+- id: super-pm-tools
+  name: dsh-super-pm
+- id: super-pm-skill-filesystem
+  name: '@deepseek-ai/dsh-skill-filesystem'
+```
+
+这与 `dsh-better-sidebar`、`dsh-spend`、`@etony668/dsh-task-board` 等可用第三方 bundle 使用同一挂载方式（bundle 自带 patch，自引用包名）。
 
 ### 工具
 
@@ -173,15 +209,15 @@ python3 skills/super-pm/scripts/validate_sources.py
 
 ```bash
 git add .
-git commit -m "chore: prepare v0.1.0 release"
+git commit -m "chore: prepare v0.8.3 release"
 git push origin main
 ```
 
 创建稳定版本 tag：
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.8.3
+git push origin v0.8.3
 ```
 
 建议发布前执行：
@@ -198,7 +234,7 @@ python3 skills/super-pm/scripts/validate_sources.py
 - `CHANGELOG.md`
 - GitHub tag
 
-发布后，建议在干净的 DSH profile 中安装带 tag 的版本，并确认 `/super-pm` 出现在技能目录中。
+发布后，建议在干净的 DSH profile 中安装带 tag 的版本，并用 `dsh --profile <name> --dump-config` 确认 `super-pm-tools` 与 `super-pm-skill-filesystem` 两行都在组合树中。
 
 ## 项目结构
 
