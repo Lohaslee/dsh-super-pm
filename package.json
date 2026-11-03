@@ -31,7 +31,9 @@
     "dsh-plugin",
     "agent-skill",
     "product-management",
-    "super-pm"
+    "super-pm",
+    "pt-br",
+    "portuguese"
   ],
   "repository": {
     "type": "git",

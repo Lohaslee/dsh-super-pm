@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   decisionKey,
+  detectLocale,
   findDuplicate,
   lineage,
   normalizeQuestion,
@@ -49,5 +50,23 @@ assert.deepEqual(lineage(superseded.records, superseded.id).map((record) => reco
 
 const orphan = parseDocument("## DEC-0001：问题\n- 状态：已替代\n- 日期：2026-09-01\n- 决定：方向\n- 被替代为：DEC-9999\n");
 assert.ok(orphan.errors.some((error) => error.code === "ORPHAN_LINK"));
+
+// Locale-aware serialization: pt-BR must never leak Chinese field labels.
+const ptText = serializeDocument(appended.records, { locale: "pt-BR" });
+assert.ok(ptText.includes("Fronteira Negativa"), "pt-BR output must use Portuguese labels");
+assert.ok(ptText.includes("Próxima validação"), "pt-BR output must use Portuguese labels");
+assert.ok(!ptText.includes("负向边界"), "pt-BR output must not contain Chinese labels");
+const ptRoundTrip = parseDocument(ptText);
+assert.equal(ptRoundTrip.errors.length, 0);
+assert.equal(ptRoundTrip.records[0].negativeBoundary, base.negativeBoundary);
+assert.equal(ptRoundTrip.records[0].decision, base.decision);
+
+// A Chinese file must still round-trip through the default locale.
+const zhText = serializeDocument(appended.records);
+assert.ok(zhText.includes("负向边界"), "default locale stays zh");
+
+// Existing language is detected so later saves keep the same language.
+assert.equal(detectLocale(ptText), "pt-BR");
+assert.equal(detectLocale(zhText), "zh");
 
 console.log("decision core tests passed");

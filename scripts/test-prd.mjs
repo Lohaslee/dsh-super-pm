@@ -30,4 +30,32 @@ assert.deepEqual(validatePrd(input), []);
 assert.ok(validatePrd({ ...input, maturity: "可进入交付", metric: "" }).some((error) => error.code === "INCOMPLETE_READY"));
 assert.ok(validatePrd({ ...input, acceptance: "" }).some((error) => error.code === "MISSING_FIELD"));
 
+// pt-BR PRDs use Portuguese sections and never leak Chinese labels.
+const ptInput = {
+  ...input,
+  locale: "pt-BR",
+  maturity: "Rascunho de direção",
+  mustNot: "não pode decidir o rumo do produto pelo usuário",
+  notNow: "sem colaboração de equipe nem permissões",
+  constraints: "primeira versão limitada a uma semana de teste",
+  protectedQuality: "o resultado precisa ser explicável",
+  metric: "retenção na segunda semana",
+  acceptance: "pelo menos 4 de 10 usuários concluem a segunda organização",
+  recovery: "preservar o feedback original em caso de falha",
+  validations: [{ id: "VAL-0001", title: "retenção de uma semana", observed: "6/10", decisionChange: "Mantida" }]
+};
+const ptDocument = renderPrd(ptInput);
+assert.match(ptDocument, /Maturidade do artefato/);
+assert.match(ptDocument, /Fronteira Negativa/);
+assert.match(ptDocument, /Próxima validação|Pronto para implementação|Snapshot de discussão|Rascunho de direção/);
+assert.ok(!/负向边界|当前决定|待确认/.test(ptDocument), "pt-BR PRD must not contain Chinese labels");
+assert.deepEqual(validatePrd(ptInput), []);
+const ptReady = validatePrd({ ...ptInput, maturity: "Pronto para implementação", metric: "" });
+assert.ok(ptReady.some((error) => error.code === "INCOMPLETE_READY"));
+
+// English PRDs are supported too.
+const enDocument = renderPrd({ ...input, locale: "en", maturity: "Draft" });
+assert.match(enDocument, /Negative Boundary/);
+assert.match(enDocument, /Product promise/);
+
 console.log("prd tests passed");

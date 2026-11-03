@@ -4,6 +4,14 @@
 
 它不是一个独立的产品管理系统，也不是简单的提示词集合，而是把 Super PM 的产品分析方法、七套产品视角、双语参考资料和工作流，以 DSH 可安装的插件形式提供给模型使用。
 
+## 工作语言 / Idiomas / Working languages
+
+Skill 支持三种工作语言：**简体中文（zh-CN）**、**English（en）** 和 **Português do Brasil（pt-BR）**。
+
+- 使用葡萄牙语时，PRD、ADR、决策记录（`.super-pm/decisions.md`）和报告默认用**巴西葡萄牙语**撰写，不会退回中文或英文。
+- `super_pm_save_decision` 接受 `locale` 参数（`zh` / `en` / `pt-BR`）；`super_pm_generate_prd` 和 `super_pm_save_prd` 接受 `input.locale`。已有决策文件的语种会被自动识别并沿用。
+- Portuguese reference files live in `skills/super-pm/references/pt-BR/`. The thinker cards, `worked-example.md`, and `behavior-evals.md` currently fall back to the English files until native-speaker-reviewed Portuguese sets exist.
+
 ## Super PM 是什么
 
 这个需求是真的吗？用户为什么要放弃现在的做法？如果只能做好一件事，应该是什么？又有哪些东西看起来很诱人，但这次坚决不能做？
