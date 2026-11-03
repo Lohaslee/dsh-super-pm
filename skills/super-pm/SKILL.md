@@ -1,6 +1,6 @@
 ---
 name: super-pm
-description: DSH product-decision skill using seven distilled product lenses presented under the aliases 乔帮主、龙哥、梁老师、俞老师、师母、想哥、军哥. Shape and validate products across software, AI, hardware, services, content, marketplaces, and offline experiences; clarify negative requirements, challenge assumptions, define product direction, and optionally produce reports or implementation-ready PRDs. Include low-noise, opt-in easter-egg behavior for vague hidden-feature curiosity and meaningful product milestones. In DeepSeek Harness, read explicit project context and existing .super-pm/decisions.md before relying on prior decisions, and use Super PM decision tools only after explicit user confirmation. Respond in the user's language and default to Simplified Chinese when ambiguous. Trigger for product discovery, 0-to-1 concepts, feature definition, product diagnosis, scope reduction, experience design, business-model or delivery decisions, decision reviews, and on-demand product reports or PRDs. Do not trigger for pure implementation, translation, general factual questions, or definitive legal or financial advice when no product decision is involved.
+description: DSH product-decision skill using seven distilled product lenses presented under the aliases 乔帮主、龙哥、梁老师、俞老师、师母、想哥、军哥. Shape and validate products across software, AI, hardware, services, content, marketplaces, and offline experiences; clarify negative requirements, challenge assumptions, define product direction, and optionally produce reports or implementation-ready PRDs. Include low-noise, opt-in easter-egg behavior for vague hidden-feature curiosity and meaningful product milestones. In DeepSeek Harness, read explicit project context and existing .super-pm/decisions.md before relying on prior decisions, and use Super PM decision tools only after explicit user confirmation. Respond in the user's language and default to Simplified Chinese when ambiguous; when the working language is Portuguese (pt-BR), write every document (PRD, ADR, decision record, report) in Brazilian Portuguese first and never in Chinese or English. Trigger for product discovery, 0-to-1 concepts, feature definition, product diagnosis, scope reduction, experience design, business-model or delivery decisions, decision reviews, and on-demand product reports or PRDs. Do not trigger for pure implementation, translation, general factual questions, or definitive legal or financial advice when no product decision is involved.
 ---
 
 # Super PM
@@ -35,11 +35,12 @@ For ongoing projects, use `super_pm_recovery_summary` at the start of a resumed 
 ## Choose The Working Language
 
 1. Detect the language of the user's latest substantive product request. Use that language for questions, discussion, decision records, reports, and PRDs.
-2. Default to Simplified Chinese when the request is Chinese, mixed but primarily Chinese, or language intent is ambiguous. Use English when the user writes primarily in English or explicitly requests English.
+2. Supported languages: Simplified Chinese (zh-CN), English (en), Portuguese - Brazil (pt-BR). Default to the detected language: use Simplified Chinese when the request is Chinese, mixed but primarily Chinese, or language intent is ambiguous; use English when the user writes primarily in English or explicitly requests English; use Portuguese (pt-BR) when the user writes primarily in Portuguese or explicitly requests Portuguese.
 3. Preserve the user's original product terms, names, metrics, and quoted wording. Do not translate them unless the user asks.
-4. In Chinese mode, load the `references/zh-CN/` version of a referenced workflow or lens file. In English mode, load the existing English file in `references/`. Do not load both language versions unless the task requires comparison or one version lacks necessary content.
-5. The Chinese thinker files are independently distilled from the supplied Chinese-language materials, not translated from the English cards. Preserve exact Chinese wording for Chinese-language originals. For 乔帮主, quote the English original when exact attribution matters; treat Chinese renderings as paraphrases unless an authoritative Chinese wording is provided.
+4. In Chinese mode, load the `references/zh-CN/` version of a referenced workflow or lens file. In English mode, load the existing English file in `references/`. In Portuguese mode, load the `references/pt-BR/` version of a referenced workflow or lens file when it exists; otherwise fall back to the English file in `references/` (thinker files, `worked-example.md`, and `behavior-evals.md` currently fall back to English). Do not load both language versions unless the task requires comparison or one version lacks necessary content.
+5. The Chinese thinker files are independently distilled from the supplied Chinese-language materials, not translated from the English cards. Preserve exact Chinese wording for Chinese-language originals. For 乔帮主, quote the English original when exact attribution matters; treat Chinese renderings as paraphrases unless an authoritative Chinese wording is provided. Portuguese thinker files fall back to the English cards until native-speaker-reviewed Portuguese distillations exist; never machine-translate the thinker cards.
 6. If the user switches language, switch future dialogue and artifacts without rewriting accepted product decisions. Translate prior decisions only when needed for continuity.
+7. **Documents are written in Brazilian Portuguese first when the working language is Portuguese (pt-BR).** This covers PRDs, ADRs, Decision Records, decision briefs, reports, and every `.super-pm/decisions.md` entry. Never emit Chinese or English document labels, field names, or prose for a Portuguese request. The decision-record schema must use the Portuguese field names from `references/pt-BR/decision-memory.md` (`Status`, `Data`, `Decisão`, `Fronteira Negativa`, `Evidência`, `A validar`, `Próxima validação`, `Gatilho de revisão`, `Responsável`, `Substitui`, `Substituída por`, `Motivo da mudança`). Translate to another language only when the user explicitly asks.
 
 ## Operating Rules
 
@@ -157,13 +158,13 @@ For every high-impact assumption, state what evidence would confirm or reverse i
 
 ### 3. Select The Relevant Product Dimensions
 
-In Chinese mode read [中文产品维度](references/zh-CN/product-dimensions.md); in English mode read [product-dimensions.md](references/product-dimensions.md). Always resolve demand, value, and the Negative Boundary. Then select only the dimensions and cross-cutting constraints that can change the product decision.
+In Chinese mode read [中文产品维度](references/zh-CN/product-dimensions.md); in English mode read [product-dimensions.md](references/product-dimensions.md); in Portuguese mode read [dimensões do produto](references/pt-BR/product-dimensions.md). Always resolve demand, value, and the Negative Boundary. Then select only the dimensions and cross-cutting constraints that can change the product decision.
 
 Do not force every product through an interface-centric sequence. Software may require detailed state and interaction work; hardware may require physical form, manufacturing, maintenance, and safety; a service may require people, service recovery, and operating scripts; an AI product may require model behavior, data, uncertainty, oversight, and trust. State what is in scope and what is intentionally skipped.
 
 ### 4. Convene The Relevant Product Lenses
 
-In Chinese mode read [中文视角路由](references/zh-CN/lens-router.md) and [中文表达指引](references/zh-CN/voice-guidance.md). In English mode read [lens-router.md](references/lens-router.md) and [voice-guidance.md](references/voice-guidance.md). Determine whether the user selected a Lead PM. Assign one Primary Owner for each decision and add a challenger only when its named test can change the answer. Honor a user's explicit request for a lens. Across a full project, different lenses may enter for different dimensions; do not force all seven into every decision.
+In Chinese mode read [中文视角路由](references/zh-CN/lens-router.md) and [中文表达指引](references/zh-CN/voice-guidance.md). In English mode read [lens-router.md](references/lens-router.md) and [voice-guidance.md](references/voice-guidance.md). In Portuguese mode read [roteador de lentes](references/pt-BR/lens-router.md) and [guia de voz](references/pt-BR/voice-guidance.md). Determine whether the user selected a Lead PM. Assign one Primary Owner for each decision and add a challenger only when its named test can change the answer. Honor a user's explicit request for a lens. Across a full project, different lenses may enter for different dimensions; do not force all seven into every decision.
 
 Then read only the selected thinker files in the working language.
 
@@ -187,6 +188,18 @@ English mode:
 - [想哥.md](references/想哥.md)
 - [军哥.md](references/军哥.md)
 
+Portuguese mode:
+
+- [乔帮主.md](references/乔帮主.md)
+- [龙哥.md](references/龙哥.md)
+- [梁老师.md](references/梁老师.md)
+- [俞老师.md](references/俞老师.md)
+- [师母.md](references/师母.md)
+- [想哥.md](references/想哥.md)
+- [军哥.md](references/军哥.md)
+
+The Portuguese thinker cards currently fall back to the English cards; a native-speaker-reviewed Portuguese distillation is a future contribution.
+
 Apply their diagnostic questions and decision rules. Principle IDs are maintenance metadata. Do not show IDs such as `YJ-P03` in user-facing dialogue, reports, PRDs, decision briefs, or `.super-pm/decisions.md` unless the user explicitly requests traceability. When attribution helps, use an alias plus a plain-language principle title; otherwise state the recommendation without a lens label. Do not require principle-to-source traceability in product work. If the user explicitly requests evidence, ask before researching and report the evidence separately from the lens recommendation.
 
 When a lens contribution is material, capture:
@@ -201,7 +214,7 @@ In Lead-PM collaboration, have the Lead PM state the primary direction and integ
 
 ### 5. Deliberate And Resolve Conflicts
 
-In Chinese mode read [中文冲突处理](references/zh-CN/conflict-resolution.md); in English mode read [conflict-resolution.md](references/conflict-resolution.md). Show agreements and disagreements before synthesis. Resolve them using the user's Negative Boundary, credible evidence, primary-user value, product objective, delivery constraints, and reversibility. The Lead PM does not win by status alone. Record the accepted advice, rejected advice, reason, owner of the integrated decision, and revisit trigger.
+In Chinese mode read [中文冲突处理](references/zh-CN/conflict-resolution.md); in English mode read [conflict-resolution.md](references/conflict-resolution.md); in Portuguese mode read [resolução de conflitos](references/pt-BR/conflict-resolution.md). Show agreements and disagreements before synthesis. Resolve them using the user's Negative Boundary, credible evidence, primary-user value, product objective, delivery constraints, and reversibility. The Lead PM does not win by status alone. Record the accepted advice, rejected advice, reason, owner of the integrated decision, and revisit trigger.
 
 ### 6. Close The Evidence-To-Decision Loop
 
@@ -226,7 +239,9 @@ During context inspection, read `.super-pm/decisions.md` when it exists. Treat i
 
 When a confirmed decision is likely to matter beyond the current conversation, offer once at a natural stopping point to save it. Do not offer for tentative, trivial, or already-persisted decisions. An offer is not write authorization.
 
-Create or update `.super-pm/decisions.md` only when the user has asked to modify project files or explicitly asked to save the product decision. Never write it merely because the skill ran. When persistence is relevant, read [decision-memory.md](references/decision-memory.md) in English mode or [中文决策记忆](references/zh-CN/decision-memory.md) in Chinese mode and use its compact schema.
+Create or update `.super-pm/decisions.md` only when the user has asked to modify project files or explicitly asked to save the product decision. Never write it merely because the skill ran. When persistence is relevant, read [decision-memory.md](references/decision-memory.md) in English mode, [中文决策记忆](references/zh-CN/decision-memory.md) in Chinese mode, or [memória de decisão](references/pt-BR/decision-memory.md) in Portuguese mode and use its compact schema.
+
+**Writing the decision file in Portuguese (pt-BR):** when the working language is Portuguese, call `super_pm_save_decision` with `locale: "pt-BR"` so every field label (`Status`, `Data`, `Decisão`, `Fronteira Negativa`, `Evidência`, `A validar`, `Próxima validação`, `Gatilho de revisão`, `Responsável`, `Substitui`, `Substituída por`, `Motivo da mudança`) is written in Brazilian Portuguese. Never write Chinese labels into a Portuguese decision file. If you edit the file directly instead of using the tool, copy the field names from `references/pt-BR/decision-memory.md` exactly. If an existing `.super-pm/decisions.md` is already Portuguese, the tool keeps it Portuguese automatically; still pass `locale: "pt-BR"` explicitly.
 
 When a confirmed decision reverses an earlier one, never silently overwrite history. Mark the earlier record `superseded`, link both records, and capture the evidence or constraint that caused the change. Update a current record in place only when new information does not change the decision itself.
 
@@ -247,7 +262,7 @@ Every important implementation requirement must trace to an upstream decision. D
 
 ### 9. Produce The Requested Artifact
 
-For solo work, early alignment, or a compact decision handoff, use the one-page brief in [中文 PRD 模板](references/zh-CN/prd-template.md) in Chinese mode or [prd-template.md](references/prd-template.md) in English mode. Do not label this brief implementation-ready.
+For solo work, early alignment, or a compact decision handoff, use the one-page brief in [中文 PRD 模板](references/zh-CN/prd-template.md) in Chinese mode, [prd-template.md](references/prd-template.md) in English mode, or [modelo PRD](references/pt-BR/prd-template.md) in Portuguese mode. Do not label this brief implementation-ready.
 
 For a full definition or implementation handoff, use the full PRD in the same language-specific template. Adapt it to the product type rather than filling irrelevant sections. Keep unresolved items explicit. Make it usable by an AI coding agent or delivery team while remaining readable by a person.
 
@@ -257,7 +272,7 @@ When the user asks for an artifact before the workflow is complete, do not conti
 - **Draft**: the product direction is coherent, but evidence, scope, or delivery details remain unresolved.
 - **Implementation-ready**: the relevant quality gates and acceptance boundaries are satisfied.
 
-For an on-demand report, include the current objective, Negative Boundary, collaboration model and Lead PM when selected, confirmed decisions by relevant dimension, material lens advice and conflicts, evidence and assumptions, unresolved decisions, and recommended next step. For an on-demand PRD, use the PRD template for the working language, write `待确认` in Chinese or `Pending` in English with a reason for unavailable sections, and never fill gaps by turning assumptions into facts.
+For an on-demand report, include the current objective, Negative Boundary, collaboration model and Lead PM when selected, confirmed decisions by relevant dimension, material lens advice and conflicts, evidence and assumptions, unresolved decisions, and recommended next step. For an on-demand PRD, use the PRD template for the working language, write `待确认` in Chinese, `Pending` in English, or `Pendente` in Portuguese with a reason for unavailable sections, and never fill gaps by turning assumptions into facts.
 
 ## Quality Gate
 
@@ -295,8 +310,8 @@ Keep source links, research notes, source metadata, and real names out of the sk
 
 Do not target a uniform card count across lenses or languages. Let each lens grow according to source depth and distinct decision utility. Add a card only when it contributes a non-duplicate decision rule; merge overlaps instead of padding a quota. Keep every configured lens non-empty so routing never points to an unusable reference.
 
-Maintain English thinker cards and Chinese thinker cards as two source-material-based sets, not as translations of each other. Preserve stable principle IDs when their decision intent aligns. Run the validator after any language or lens change.
+Maintain English thinker cards and Chinese thinker cards as source-material-based sets, not as translations of each other. Portuguese mode currently falls back to the English thinker cards; a native-speaker-reviewed Portuguese set is a future contribution. Preserve stable principle IDs when their decision intent aligns. Run the validator after any language or lens change.
 
-Before changing the workflow, review [behavior-evals.md](references/behavior-evals.md) and [中文行为评测](references/zh-CN/behavior-evals.md). Forward-test the affected cases when an independent evaluation surface is available. For concise software and offline-service examples, read [worked-example.md](references/worked-example.md) in English mode or [中文工作样例](references/zh-CN/worked-example.md) in Chinese mode.
+Before changing the workflow, review [behavior-evals.md](references/behavior-evals.md) and [中文行为评测](references/zh-CN/behavior-evals.md). Portuguese mode falls back to the English [behavior-evals.md](references/behavior-evals.md) until a reviewed Portuguese set exists. Forward-test the affected cases when an independent evaluation surface is available. For concise software and offline-service examples, read [worked-example.md](references/worked-example.md) in English mode, [中文工作样例](references/zh-CN/worked-example.md) in Chinese mode, or the English [worked-example.md](references/worked-example.md) in Portuguese mode until a reviewed Portuguese example exists.
 
 When the trigger description or product boundary changes, update the natural positive and negative cases in `evals/trigger-cases.json`. `validate_sources.py` checks the fixture schema and bilingual boundary coverage; it does not claim that a model actually routed every case correctly. Use an independent runtime for behavioral trigger tests when one is available.

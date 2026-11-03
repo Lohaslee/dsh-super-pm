@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add Brazilian Portuguese (`pt-BR`) as a first-class working language. `super_pm_save_decision` now takes a `locale` parameter (`zh`, `en`, `pt-BR`) and serializes the decision file with Portuguese field labels instead of the hard-coded Chinese ones; the language of an existing `.super-pm/decisions.md` is detected and preserved. `super_pm_generate_prd` and `super_pm_save_prd` accept `input.locale` and render Portuguese PRDs.
+- Add `skills/super-pm/references/pt-BR/` with Portuguese `decision-memory.md`, `prd-template.md`, `product-dimensions.md`, `lens-router.md`, `voice-guidance.md`, and `conflict-resolution.md`.
+- Make the working-language rule explicit: when the working language is Portuguese, PRDs, ADRs, decision records, and reports are written in Brazilian Portuguese first, never Chinese or English. Portuguese thinker cards, `worked-example.md`, and `behavior-evals.md` fall back to English until native-speaker-reviewed Portuguese sets exist.
+- Add locale round-trip tests for the decision core and PRD renderer.
+
 ## 0.8.3 - 2026-09-10
 
 - Mount as a standard DSH profile bundle: both rows (`super-pm-tools`, `super-pm-skill-filesystem`) now live in this package's own `cordis.patch.yml`, and the package only has to be listed in the profile's `dsh.profile.bundles`. Editing the installed `dsh-base` patch is no longer required, so a DSH upgrade can no longer silently drop the mount.
